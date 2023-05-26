@@ -6,6 +6,8 @@ export const Header = styled.header`
     font-size: 18px;
     line-height: 1.2;
     background-color: #baf7f7;
+    max-width: 1400px;
+
 `
 
 export const List = styled.ul`

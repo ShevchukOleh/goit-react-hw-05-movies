@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
 import Home from "pages/Home/Home";
 import Movies from "pages/Movies/Movies";
-import { Reviews } from "./Reviews";
-import { Cast } from "./Cast";
+import { Reviews } from "./Reviews/Reviews";
+import { Cast } from "./Cast/Cast";
 import MoviesDetails from "pages/MoviesDetails/MoviesDetails";
 
 export const App = () => {

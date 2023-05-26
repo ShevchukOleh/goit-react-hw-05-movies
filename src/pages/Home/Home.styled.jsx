@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     padding: 5px 20px;
+    max-width: 1400px;
+
 `
 export const Title = styled.h1`
     font-size: 22px;

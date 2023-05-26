@@ -1,10 +1,11 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Container, GenresList, InformationContainer, InformationList, MovieInfo, MovieOverview, MovieTitle, OverviewTitle, UserScore } from './MoviesDetails.styled';
+import { Container, ContainerMovieInfo, GenresList, GoBack, Image, InformationContainer, InformationList, InformationListItem, MovieInfo, MovieOverview, MovieTitle, OverviewTitle, UserScore } from './MoviesDetails.styled';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
+const noPhoto = 'https://i.ibb.co/0ymG7Qg/31284806-2.jpg';
 
 const MoviesDetails = () => {
   const { movieId } = useParams();
@@ -32,12 +33,14 @@ const MoviesDetails = () => {
     return <div>Loading...</div>;
   }
 
-  const imagePath = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
+  const imagePath = movie.poster_path ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`: noPhoto;
   return (
     <>
-      <Link to={backLinkLocationRef.current}>Go back</Link>
+      <ContainerMovieInfo>
+        <Link to={backLinkLocationRef.current}><GoBack>&larr; Go back</GoBack></Link>
+      </ContainerMovieInfo>
       <Container>
-        <img src={imagePath} alt={movie.title} />
+        <Image src={imagePath} alt={movie.title} />
         <MovieInfo>
           <MovieTitle>{movie.title}</MovieTitle>
           <UserScore>User score: {(movie.vote_average*10).toFixed(0)}%</UserScore>
@@ -54,15 +57,11 @@ const MoviesDetails = () => {
       <InformationContainer>
         <h4>Additional information</h4>
         <InformationList>
-          <li>
-            <Link to={`cast`}>Cast</Link>
-          </li>
-          <li>
-            <Link to={`reviews`}>Reviews</Link>
-          </li>
+            <Link to={`cast`}><InformationListItem>&bull; Cast</InformationListItem></Link>
+            <Link to={`reviews`}><InformationListItem>&bull; Reviews</InformationListItem></Link>
         </InformationList>
-        <Outlet />
       </InformationContainer>
+      <Outlet />
     </>
   );
 };

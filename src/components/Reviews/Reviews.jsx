@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Container, ListItem, Text, Title } from './Reviews.styled';
 const { useParams } = require('react-router-dom');
 
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -26,15 +27,15 @@ export const Reviews = () => {
   }, []);
   
   return (
-    <div>
+    <Container>
       <ul>
-        {reviews.map(review => (
-          <li key={review.id}>
-            <h2>Author: {review.author}</h2>
-            <p>{review.content}</p>
-          </li>
-        ))}
+        {reviews.length !== 0 ?reviews.map(review => (
+          <ListItem key={review.id}>
+            <Title>&bull; Author: {review.author}</Title>
+            <Text>{review.content}</Text>
+          </ListItem>
+        )) : `We don't have any reviews for this movie.`}
       </ul>
-    </div>
+    </Container>
   )
 };
