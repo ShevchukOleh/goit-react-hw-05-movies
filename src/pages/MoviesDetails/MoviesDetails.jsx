@@ -1,5 +1,5 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Container, GenresList, InformationContainer, InformationList, MovieInfo, MovieOverview, MovieTitle, OverviewTitle, UserScore } from './MoviesDetails.styled';
 
@@ -9,6 +9,9 @@ const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
 const MoviesDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+
+  const backLinkLocationRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     async function fetchMovie() {
@@ -32,7 +35,7 @@ const MoviesDetails = () => {
   const imagePath = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
   return (
     <>
-      <button>Go back</button>
+      <Link to={backLinkLocationRef.current}>Go back</Link>
       <Container>
         <img src={imagePath} alt={movie.title} />
         <MovieInfo>
@@ -52,10 +55,10 @@ const MoviesDetails = () => {
         <h4>Additional information</h4>
         <InformationList>
           <li>
-            <Link to={`${movieId}/subbreeds`}>Cast</Link>
+            <Link to={`cast`}>Cast</Link>
           </li>
           <li>
-            <Link to={`${movieId}/gallery`}>Reviews</Link>
+            <Link to={`reviews`}>Reviews</Link>
           </li>
         </InformationList>
         <Outlet />
