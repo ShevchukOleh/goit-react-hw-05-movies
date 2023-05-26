@@ -13,8 +13,6 @@ export const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
-  console.log(cast)
-
   async function fetchCastMovie() {
     const searchParams = new URLSearchParams({
       api_key: API_KEY
