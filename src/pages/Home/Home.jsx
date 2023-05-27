@@ -3,9 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import { Container, Movie, Title } from './Home.styled';
-
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
+import { API_KEY, BASE_URL } from 'components/API/API';
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);

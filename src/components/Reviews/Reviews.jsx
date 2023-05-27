@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Container, ListItem, Text, Title } from './Reviews.styled';
-const { useParams } = require('react-router-dom');
+import { API_KEY, BASE_URL } from 'components/API/API';
 
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
+const { useParams } = require('react-router-dom');
 
 const Reviews = () => {
   const { movieId } = useParams();

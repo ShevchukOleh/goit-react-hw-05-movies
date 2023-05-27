@@ -4,10 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Container, ContainerMovieInfo, GenresList, GoBack, Image, InformationContainer, InformationList, InformationListItem, MovieInfo, MovieOverview, MovieTitle, OverviewTitle, UserScore } from './MoviesDetails.styled';
 import { Suspense } from 'react';
-
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
-const noPhoto = 'https://i.ibb.co/0ymG7Qg/31284806-2.jpg';
+import { API_KEY, BASE_URL, noPhoto } from 'components/API/API';
 
 const MoviesDetails = () => {
   const { movieId } = useParams();

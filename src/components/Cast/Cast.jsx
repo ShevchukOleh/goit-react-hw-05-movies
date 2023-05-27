@@ -2,12 +2,9 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Container, Image, List, ListItem, ActorName, Character } from './Cast.styled';
+import { API_KEY, BASE_URL, noPhoto } from 'components/API/API';
 
 const { useParams } = require('react-router-dom');
-
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
-const noPhoto = 'https://i.ibb.co/nBW9G9B/avatar.jpg'
 
 const Cast = () => {
   const { movieId } = useParams();

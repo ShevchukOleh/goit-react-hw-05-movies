@@ -3,9 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Button, Container, Form, Input, Movie } from './Movies.styled';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
+import { API_KEY, BASE_URL } from 'components/API/API';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -61,9 +59,9 @@ const Movies = () => {
         <Button type='submit'>Search</Button>
       </Form>
       <div>
-        {movies.map((movie) => (
+        {movies.length !== 0 ?movies.map((movie) => (
           <Link key={movie.id} to={`${movie.id}`} state={{ from: location }}><Movie>&bull; {movie.title}</Movie></Link>
-        ))}
+        )) : <div>Please enter the correct search query.</div>}
       </div>
     </Container>
   );
