@@ -12,7 +12,7 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-export const Layout = () => {
+const Layout = () => {
   return (
     <>
       <Header>
@@ -33,3 +33,5 @@ export const Layout = () => {
     </>
   );
 };
+
+export default Layout;
