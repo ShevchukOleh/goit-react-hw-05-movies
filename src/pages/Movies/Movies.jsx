@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Button, Container, Form, Input, Movie } from './Movies.styled';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({});
   const query = searchParams.get("query") ?? '';
   const location = useLocation();
 
@@ -36,6 +37,7 @@ const Movies = () => {
       return;
     }
 
+    setMovies([])
     fetchMoviesQuery();
   };
 
@@ -65,6 +67,16 @@ const Movies = () => {
       </div>
     </Container>
   );
+};
+
+Movies.propTypes = {
+  query: PropTypes.string,
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+    })
+  ),
 };
 
 export default Movies;

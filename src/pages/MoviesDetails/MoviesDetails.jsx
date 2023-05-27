@@ -1,7 +1,9 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Container, ContainerMovieInfo, GenresList, GoBack, Image, InformationContainer, InformationList, InformationListItem, MovieInfo, MovieOverview, MovieTitle, OverviewTitle, UserScore } from './MoviesDetails.styled';
+import { Suspense } from 'react';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
@@ -27,7 +29,7 @@ const MoviesDetails = () => {
     };
 
     fetchMovie();
-  }, [movieId]);
+  }, [movieId]);;
 
   if (!movie) {
     return <div>Loading...</div>;
@@ -61,9 +63,26 @@ const MoviesDetails = () => {
             <Link to={`reviews`}><InformationListItem>&bull; Reviews</InformationListItem></Link>
         </InformationList>
       </InformationContainer>
-      <Outlet />
+      <Suspense fallback={<Container>Loading...</Container>}>
+        <Outlet />
+      </Suspense>
     </>
   );
+};
+
+MoviesDetails.propTypes = {
+  movieId: PropTypes.number,
+  movie: PropTypes.shape({
+    id: PropTypes.number,
+    vote_average: PropTypes.number,
+    overview: PropTypes.string,
+    title: PropTypes.string,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })),
+  }),
 };
 
 export default MoviesDetails;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
 import { Container, Movie, Title } from './Home.styled';
 
@@ -36,4 +37,14 @@ const Home = () => {
     </Container>
   );
 };
+
+Home.propTypes = {
+  popularMovies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+    })
+  ),
+};
+
 export default Home;

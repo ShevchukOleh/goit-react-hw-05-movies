@@ -1,4 +1,5 @@
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Container, Image, List, ListItem, ActorName, Character } from './Cast.styled';
 
@@ -6,10 +7,9 @@ const { useParams } = require('react-router-dom');
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '11c18f4587e0f81a9d7265ade8abe4b9';
-const noPhoto = 'https://i.ibb.co/0ymG7Qg/31284806-2.jpg';
+const noPhoto = 'https://i.ibb.co/nBW9G9B/avatar.jpg'
 
-
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
 
@@ -25,9 +25,9 @@ export const Cast = () => {
   }
 
   useEffect(() => {
-    fetchCastMovie();
+    fetchCastMovie(movieId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [movieId]);
 
   return (
     <Container>
@@ -47,3 +47,17 @@ export const Cast = () => {
 
   );
 };
+
+Cast.propTypes = {
+  movieId: PropTypes.number,
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      character: PropTypes.string,
+      profile_path: PropTypes.string,
+    })
+  ),
+};
+
+export default Cast;
